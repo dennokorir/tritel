@@ -3,29 +3,29 @@
     'name': "tritel",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Tritel Extensions to Standard Odoo Modules""",
 
     'description': """
-        Long description of module's purpose
+        This module contains Tritel Extensions to Modules that come with Odoo Off the Box
     """,
 
-    'author': "Your Company",
-    'website': "http://www.yourcompany.com",
+    'author': "Tritel Technologies",
+    'website': "http://www.tritel.co.ke",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
+    'category': 'General',
+    'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','account'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'templates.xml',
+        'views/res_partner.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
