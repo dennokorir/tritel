@@ -16,6 +16,7 @@ document in the section below
 
 #account.move.line
 #account.invoice
+#account.voucher -->To accomodate payments
 
 from openerp import models, fields, api
 
@@ -104,5 +105,37 @@ class account_invoice(models.Model):
                            WHERE move_id=%s """,
                         (dimension1, dimension2, dimension3, dimension4,  inv.move_id.id))
 
+class account_voucher(models.Model):
+    _inherit = 'account.voucher'
 
+    dimension1 = fields.Many2one('dimension.values', domain = [('sequence','=',1)])
+    dimension2 = fields.Many2one('dimension.values', domain = [('sequence','=',2)])
+    dimension3 = fields.Many2one('dimension.values', domain = [('sequence','=',3)])
+    dimension4 = fields.Many2one('dimension.values', domain = [('sequence','=',4)])
+
+    @api.multi
+    def post_dimensions(self):
+       #handle null values
+        dimension1 = None
+        dimension2 = None
+        dimension3 = None
+        dimension4 = None
+
+        if self.dimension1:
+            dimension1 = self.dimension1.id
+
+        if self.dimension2:
+            dimension2 = self.dimension2.id
+
+        if self.dimension3:
+            dimension3 = self.dimension3.id
+
+        if self.dimension4:
+            dimension4 = self.dimension4.id
+
+        for inv in self:
+
+            self._cr.execute(""" UPDATE account_move_line SET dimension1=%s, dimension2=%s, dimension3=%s, dimension4=%s
+                           WHERE move_id=%s """,
+                        (dimension1, dimension2, dimension3, dimension4,  inv.move_id.id))
 

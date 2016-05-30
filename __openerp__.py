@@ -26,7 +26,9 @@
         # 'security/ir.model.access.csv',
         'templates.xml',
         'views/res_partner.xml',
-        'views/dimensions.xml'
+        'views/dimensions.xml',
+        #'views/account_voucher.xml'
+        'reports/reports.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -6,6 +6,7 @@ class res_partner(models.Model):
 
     balance = fields.Float(compute = 'calculate_balance')
     invoice_ids = fields.One2many('account.invoice','partner_id')
+    identification = fields.Char(string = "ID/COMPANY REGISTRATION")
 
     @api.one
     @api.depends('invoice_ids')
