@@ -28,7 +28,8 @@
         'views/res_partner.xml',
         'views/dimensions.xml',
         #'views/account_voucher.xml'
-        'reports/reports.xml'
+        'reports/reports.xml',
+        'res_approvals.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
