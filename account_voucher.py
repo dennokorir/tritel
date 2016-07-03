@@ -5,4 +5,4 @@ class account_voucher(models.Model):
 
     def print_receipt(self):
 
-        return self.env['report'].get_action(self, 'tritel.account_receipt')
+        return self.env['report'].get_action(self, 'tritel.madiba_customer_receipt')
