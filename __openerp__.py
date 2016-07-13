@@ -29,7 +29,9 @@
         'views/dimensions.xml',
         #'views/account_voucher.xml'
         'reports/reports.xml',
-        'res_approvals.xml'
+        'views/res_approvals.xml',
+        'views/account_invoice.xml',
+        'reports/account_invoice_statements.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
