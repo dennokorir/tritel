@@ -1,0 +1,22 @@
+<openerp>
+    <data>
+        <record model = 'ir.ui.view' id = 'bank_statement_import_extensions'>
+            <field name = 'name'>Bank Statement Import</field>
+            <field name = 'model'>account.bank.statement</field>
+            <field name = 'inherit_id' ref = 'account.view_bank_statement_form'/>
+            <field name = 'arch' type = 'xml'>
+                <xpath expr = "//field[@name='period_id']" position = "after">
+                    <label for = 'statement_file'/>
+                    <field name = 'statement_file'/>
+                    <!--<field name = 'test'/>-->
+                </xpath>
+
+                <xpath expr = "//button[@string='Reconcile']" position = "after">
+                    <button name = 'process' type = 'object' class = 'oe_highlight'
+                        string = 'Process Statement File'/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</openerp>

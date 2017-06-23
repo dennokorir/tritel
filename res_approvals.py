@@ -19,7 +19,7 @@ class approval_template(models.Model):
 
 	name = fields.Char(string = 'Approval Code')
 	description = fields.Char()
-	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan")])
+	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan"),('bank_transfer',"Bank and Cash Transfer")])
 	limit_type = fields.Selection([('checker',"Checker"),('tiered',"Tiered")])
 	additional_approvers = fields.Boolean(compute = 'sum_additional_approvers', readonly = True)
 	enabled = fields.Boolean()
@@ -37,7 +37,7 @@ class approval_template(models.Model):
 class approval_entry(models.Model):
 	_name = 'approval.entry'
 
-	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan")])
+	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan"),('bank_transfer',"Bank and Cash Transfer")])
 	document_no = fields.Char()
 	document_id = fields.Char()#this field will be a link betweeen the document and approval entries
 
@@ -47,6 +47,19 @@ class approval_entry(models.Model):
 	sender = fields.Many2one('res.users')
 	approver = fields.Many2one('res.users')
 	status = fields.Selection([('created',"Created"),('open',"Open"),('cancelled',"Cancelled"),('rejected',"Rejected"),('approved',"Approved")])
+	model = fields.Char()
+
+	@api.multi
+	def show_document(self):
+		return {
+		'view_type': 'form',
+		'view_mode': 'form',
+		'res_model': self.model,
+		'target': 'current',
+		'res_id': int(self.document_id),
+		'type': 'ir.actions.act_window'
+		}
+
 
 class additional_approvers(models.Model):
 	_name = 'additional.approvers'

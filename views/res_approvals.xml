@@ -40,8 +40,8 @@
 		    <field name = "arch" type = "xml">
 		      <tree string = "Approval Templates">
 		      	<field name = 'name'/>
-  				<field name = 'description'/>
-  				<field name = 'document_type'/>
+  				  <field name = 'description'/>
+  				  <field name = 'document_type'/>
 		      	<field name = 'enabled'/>
 		      </tree>
 		  </field>
@@ -51,19 +51,15 @@
          <field name = 'name'>Approvals</field>
          <field name = 'model'>approval.entry</field>
          <field name = 'arch' type = 'xml'>
-
-            <tree editable = 'false'>
+            <tree>
               <field name = 'document_no'/>
-              <!--<field name = 'sender_id'/>
-              <field name = 'approver_id'/>-->
               <field name = 'sender'/>
               <field name = 'approver'/>
               <field name = 'sequence'/>
               <field name = 'status'/>
-              <!--<field name = 'document_id'/>-->
+              <field name = 'model'/>
+              <field name = 'document_id'/>
             </tree>
-
-
           </field>
         </record>
 
@@ -75,22 +71,66 @@
                 <search>
                     <field name="document_no"/>
                     <field name="document_id"/>
+                    <field name="document_type"/>
                 </search>
             </field>
         </record>
 
-        <!--Approval Entry Action-->
+        <!--Approval Entry Approver Search View-->
+        <record model='ir.ui.view' id='approvals_approver_search_view'>
+          <field name='name'>Approvals Approvers Search</field>
+          <field name='model'>approval.entry</field>
+          <field name='arch' type='xml'>
+            <search>
+              <filter string="My Approvals" name="my_approvals_filter" icon="terp-personal" domain="[('approver','=',uid)]"/>
+            </search>
+          </field>
+        </record>
+
+        <record model = 'ir.ui.view' id = 'approval_entry_form'>
+          <field name = 'name'>Approval Entry</field>
+          <field name = 'model'>approval.entry</field>
+          <field name = 'arch' type = 'xml'>
+            <form>
+              <sheet>
+                <header>
+                  <button name = 'show_document' type = 'object' string = 'Show Document'/>
+                </header>
+                <group>
+                  <group>
+                    <field name = 'document_no'/>
+                    <field name = 'sender'/>
+                    <field name = 'approver'/>
+                  </group>
+                  <group>
+                    <field name = 'status'/>
+                  </group>
+                </group>
+              </sheet>
+            </form>
+          </field>
+        </record>
+
+        <!--Approval Entry Action User-->
         <record model = 'ir.actions.act_window' id = 'approval_entry_list_action'>
         <field name = 'name'>Approvals</field>
         <field name = 'res_model'>approval.entry</field>
         <field name = 'view_type'>form</field>
-        <field name = 'view-mode'>tree</field>
-        <field name="context">{'search_default_document_id': active_id}</field>
-
+        <field name = 'view-mode'>tree,form</field>
+      </record>
+      <!--Approval Entry Action Approver-->
+      <record model = 'ir.actions.act_window' id = 'approval_entry_list_approver'>
+        <field name = 'name'>Approval Entries</field>
+        <field name = 'res_model'>approval.entry</field>
+        <field name = 'view_type'>form</field>
+         <field name="context">{"search_default_my_approvals_filter":1}</field>
+        <field name = 'view-mode'>tree,form</field>
       </record>
 
+      <menuitem name='Approvals' id='approvals_approvers_main_menu' parent='mail.mail_feeds_main' sequence='20'/>
+      <menuitem name='Approval Entries' id = 'approval_entries_approvers_main_menu' parent='approvals_approvers_main_menu' action='approval_entry_list_approver' sequence = '10'/>
+
 		<!--Approvals Menus start here. They will be under configurations menu in Settings-->
-		<!---->
 		<record model = "ir.actions.act_window" id = "approval_templates_list_action">
 	      <field name ="name">Approval Templates</field>
 	      <field name ="res_model">approval.template</field>

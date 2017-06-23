@@ -6,3 +6,4 @@ import dimensions
 import res_approvals
 import res_next_of_kin
 import account_invoice
+import bank
