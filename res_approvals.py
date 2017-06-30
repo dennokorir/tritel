@@ -8,7 +8,7 @@
 #
 #	Design by Tritel Technologies:::>>>dennokorir
 #	Simple but effective design
-#	All tables are designed here. All the approval functions will be inside the openerp folder in approvals.py
+#	All tables are designed here. All the approval functions will be inside the openerp folder in res_approvals.py
 #	This is to make it extensible to other modules
 '''
 from openerp import fields,models,api
@@ -19,7 +19,8 @@ class approval_template(models.Model):
 
 	name = fields.Char(string = 'Approval Code')
 	description = fields.Char()
-	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan"),('bank_transfer',"Bank and Cash Transfer")])
+	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan"),('bank_transfer',"Bank and Cash Transfer"),('payment_voucher','Payment Voucher'),
+		('petty_cash',"Petty Cash"),('invoice',"Supplier Invoice")])
 	limit_type = fields.Selection([('checker',"Checker"),('tiered',"Tiered")])
 	additional_approvers = fields.Boolean(compute = 'sum_additional_approvers', readonly = True)
 	enabled = fields.Boolean()
@@ -37,10 +38,10 @@ class approval_template(models.Model):
 class approval_entry(models.Model):
 	_name = 'approval.entry'
 
-	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan"),('bank_transfer',"Bank and Cash Transfer")])
+	document_type = fields.Selection([('member_app',"Member Application"),('closure',"Member Closure"),('loan',"Loan"),('bank_transfer',"Bank and Cash Transfer"),('payment_voucher','Payment Voucher'),
+		('petty_cash',"Petty Cash"),('invoice',"Supplier Invoice")])
 	document_no = fields.Char()
 	document_id = fields.Char()#this field will be a link betweeen the document and approval entries
-
 	sequence = fields.Integer()
 	sender_id = fields.Char()
 	approver_id = fields.Char()

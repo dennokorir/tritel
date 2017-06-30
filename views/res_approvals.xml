@@ -72,19 +72,10 @@
                     <field name="document_no"/>
                     <field name="document_id"/>
                     <field name="document_type"/>
+                    <filter string="My Approvals" name="my_approvals_filter" icon="terp-personal" domain="[('approver','=',uid),('status','=','open')]"/>
+                    <filter string="My Approved Approvals" name="my_approvals_history_filter" icon="terp-personal" domain="[('approver','=',uid),('status','=','approved')]"/>
                 </search>
             </field>
-        </record>
-
-        <!--Approval Entry Approver Search View-->
-        <record model='ir.ui.view' id='approvals_approver_search_view'>
-          <field name='name'>Approvals Approvers Search</field>
-          <field name='model'>approval.entry</field>
-          <field name='arch' type='xml'>
-            <search>
-              <filter string="My Approvals" name="my_approvals_filter" icon="terp-personal" domain="[('approver','=',uid)]"/>
-            </search>
-          </field>
         </record>
 
         <record model = 'ir.ui.view' id = 'approval_entry_form'>
@@ -129,6 +120,17 @@
 
       <menuitem name='Approvals' id='approvals_approvers_main_menu' parent='mail.mail_feeds_main' sequence='20'/>
       <menuitem name='Approval Entries' id = 'approval_entries_approvers_main_menu' parent='approvals_approvers_main_menu' action='approval_entry_list_approver' sequence = '10'/>
+
+      <!--Approval Entry Action History-->
+      <record model = 'ir.actions.act_window' id = 'approval_entry_list_approver_history'>
+        <field name = 'name'>Approval Entries</field>
+        <field name = 'res_model'>approval.entry</field>
+        <field name = 'view_type'>form</field>
+         <field name="context">{"search_default_my_approvals_history_filter":1}</field>
+        <field name = 'view-mode'>tree,form</field>
+      </record>
+
+      <menuitem name='Approved Approval Entries' id = 'approval_entries_approvers_history_main_menu' parent='approvals_approvers_main_menu' action='approval_entry_list_approver_history' sequence = '20'/>
 
 		<!--Approvals Menus start here. They will be under configurations menu in Settings-->
 		<record model = "ir.actions.act_window" id = "approval_templates_list_action">
