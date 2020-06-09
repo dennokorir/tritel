@@ -19,20 +19,27 @@
     'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account','mail'],
+    'depends': [
+        'base',
+        'account',
+        # 'mail',
+        # 'sale'
+        ],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'templates.xml',
-        'views/res_partner.xml',
-        'views/dimensions.xml',
+        'views/delivery_note.xml',
+        # 'views/account_invoice.xml',
+        # 'views/res_partner.xml',
+        #'views/dimensions.xml',
         #'views/account_voucher.xml'
-        'reports/reports.xml',
-        'views/res_approvals.xml',
-        'views/account_invoice.xml',
-        'reports/account_invoice_statements.xml',
-        'views/bank.xml'
+        # 'reports/reports.xml',
+        # 'views/res_approvals.xml',
+        # 'reports/account_invoice_statements.xml',
+        # 'views/bank.xml',
+        # 'views/sale.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

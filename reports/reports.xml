@@ -14,57 +14,80 @@
 
 		 <template id = "madiba_customer_receipt">
 			<t t-call = "report.html_container">
-				<t t-call = "report.external_layout">
+				<t t-foreach = "docs" t-as="doc">
+				<!--<t t-call = "report.external_layout">-->
 					<div class = "page">
 						<center>
-							<table style="border:2px;">
-							<tr>
-								<td>Address Line Here</td>
-							</tr>
-							<tr>
-								<td>Phone: 555-555-5555555</td>
-							</tr>
-							<tr>
-								<td>Fax:123-123-12356</td>
-							</tr>
-							<tr>
-								<td>Email: abc@example.com</td>
-							</tr>
-							<tr>
-								<td>Website: www.websiteaddress.com</td>
-							</tr>
+							<!--
+							<table style="border:2px; align:center;">
+
+								<tr>
+									<td>
+										<img t-att-src="'/tritel/static/src/img/logo.png'" style="width:150px;"/>
+									</td>
+								</tr>
+								<tr>
+									<td>International House, 7th Floor, Mama Ngina Street</td>
+								</tr>
+								<tr>
+									<td>Phone: 0701444555</td>
+								</tr>
+								<tr>
+									<td>Fax:</td>
+								</tr>
+								<tr>
+									<td>Email: info@madibaproperties.co.ke</td>
+								</tr>
+								<tr>
+									<td>Website: www.madibaproperties.co.ke</td>
+								</tr>
+
 							</table><br/>
+							-->
+
+							<img t-att-src="'/tritel/static/src/img/logo.png'" style="width:200px;"/><br/>
+							<p>International House, 7th Floor, Mama Ngina Street</p>
+							<p>Phone: 0701444555</p>
+							<p>Email: info@madibaproperties.co.ke</p>
+							<p>Website: www.madibaproperties.co.ke</p>
 						</center>
-							<center style="font-size:20px;">CASH RECEIPT</center>
+
+						<center style="font-size:30px;"><b>CASH RECEIPT</b></center>
+						<br/>
+						<b>Cash Receipt # : <span t-field="doc.number"/> </b>
+						<em style="margin-left:50%">Date:<span t-field="doc.date"/></em><br/>
+						<br/>
+						<b>REF #:</b> <i><span t-field="doc.reference"/></i>
+						<br/>
+						<br/>
+						<b>Cash Received From: </b> <u><i><span t-field="doc.partner_id.name"/></i></u>
+						<em style="margin-left:40%">of KES </em> <u><span t-field="doc.amount"/></u> <br/>
+						<b>For: <u><span t-field="doc.plots"/></u></b><br/><br/>
+						<table style="float: right; width: 400px; height: 75px;margin: 10px; border: 1px solid;">
+							<tr>
+									<td style="border: 1px solid">Total Amount Due</td>
+									<td style="border: 1px solid"><span t-field="doc.balance"/></td>
+							</tr>
+							<tr>
+									<td style="border: 1px solid">Amount Received</td>
+									<td style="border: 1px solid"><span t-field="doc.amount"/></td>
+							</tr>
+							<tr>
+									<td style="border: 1px solid">Balance</td>
+									<td style="border: 1px solid"><span t-field="doc.balance_after"/></td>
+							</tr>
+						</table>
+					<br/><br/><br/><p style="float:left">Payment Received in: <span t-field="doc.journal_id.name"/></p>
 							<br/>
-					<b>Cash Receipt # : 123456789</b><em style="margin-left:50%">Date: DD/MM/YYYY</em><br/>
-					<br/>
-					<b>Cash Received From </b><em style="margin-left:40%">of </em><br/><br/>
-					<b>For </b><br/><br/>
-					<table style="float: right;width: 150px;height: 75px;margin: 10px;border: 3px solid #73AD21;">
-						<tr>
-								<td>Total Amount Due</td>
-								<td></td>
-						</tr>
-						<tr>
-								<td>Amount Received</td>
-								<td></td>
-						</tr>
-						<tr>
-								<td>Balance Due</td>
-								<td></td>
-						</tr>
-					</table>
-					<br/><br/><br/><p>Payment Received in:</p>
-					<table style="border:2px;">
-						<tr><td>Cash</td><td>__</td></tr>
-						<tr><td>Cheque</td><td>__</td></tr>
-						<tr><td>Other</td><td>__</td></tr>
-					</table>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
 							<em style="margin-top:-5px; float:right;">__________________________________</em>
 							<em style="margin-top:-5px; float:right;">Signed By</em>
 
 					</div>
+				<!--</t>-->
 				</t>
 			</t>
 		</template>

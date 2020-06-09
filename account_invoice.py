@@ -12,3 +12,7 @@ class account_invoice(models.Model):
         for line in self.invoice_line:
             items += line.name +", "
         self.items = items
+
+    @api.multi
+    def print_delivery_note(self):
+        return self.env['report'].get_action(self.env['account.invoice'].search([('id','=',self.id)]), 'tritel.tritel_delivery_note')

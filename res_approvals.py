@@ -68,4 +68,4 @@ class additional_approvers(models.Model):
 	approver_id = fields.Many2one('res.users')
 	minimum_amount = fields.Float()
 	maximum_amount = fields.Float()
-	template_id = fields.Many2one('approval.template')
+	template_id = fields.Many2one('approval.template') 

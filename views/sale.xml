@@ -1,0 +1,42 @@
+<openerp>
+    <data>
+
+        <record model='ir.ui.view' id = 'tritel_sale_order_line_tree'>
+            <field name = 'name'>Sale Order Line</field>
+            <field name = 'model'>sale.order.line</field>
+            <field name = 'arch' type = 'xml'>
+                <tree>
+                    <field name = 'order_id'/>
+                    <field name = 'name'/>
+                    <field name = 'product_uom_qty'/>
+                    <field name = 'price_unit'/>
+                    <field name = 'price_subtotal'/>
+                    <field name = 'state'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model = 'ir.ui.view' id = 'tritel_sale_order_line_search_view'>
+            <field name = 'name'>Sales Order Lines Search</field>
+            <field name = 'model'>sale.order.line</field>
+            <field name = 'inherit_id' ref = 'sale.view_sales_order_line_filter'/>
+            <field name = 'arch' type = 'xml'>
+                <xpath expr="//field[@name='order_id']" position="before">
+                    <!-- This field will show up on the quick search -->
+                    <field name="name"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record model = 'ir.actions.act_window' id = 'sale_order_line_action'>
+          <field name = 'name'>Sale Order Lines</field>
+          <field name = 'res_model'>sale.order.line</field>
+          <field name = 'view_type'>form</field>
+          <field name = 'view_mode'>tree,form</field>
+      </record>
+
+      <menuitem id="menu_sale_order_lines"
+                action="sale_order_line_action" parent="base.menu_sales"
+                sequence="100"/>
+    </data>
+</openerp>

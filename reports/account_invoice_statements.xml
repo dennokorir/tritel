@@ -67,6 +67,12 @@
                                                                 <td><span t-field="p.debit"/></td>
                                                                 <td><span t-field="p.credit"/></td>
                                                             </tr>
+                                                            <tr>
+                                                                <td><b>Balance</b></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td><b><span t-field="inv.residual"/></b></td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </tr>
